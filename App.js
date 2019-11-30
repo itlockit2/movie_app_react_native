@@ -1,35 +1,37 @@
-import React from 'react';
-import {AppLoading} from "expo";
-import * as Font from 'expo-font'
-import {Ionicons} from "@expo/vector-icons";
-import { StyleSheet, Text, View } from 'react-native';
-import TabNavigation from "./navigation/TabNavigation"
+import React from "react";
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Text, View } from "react-native";
+import MainNavigation from "./navigation/MainNavigation";
 
-
-export default class App extends React.Component{
+export default class App extends React.Component {
   state = {
-    loaded : false
+    loaded: false
   };
 
-  handleError = (err) => console.log(err);
+  handleError = err => console.log(err);
 
-  handleLoaded = () => this.setState({loaded:true});
+  handleLoaded = () => this.setState({ loaded: true });
 
-  loadAssets = async() =>{
+  loadAssets = async () => {
     await Font.loadAsync({
       ...Ionicons.font
     });
-  }
+  };
 
-  render(){
-    const {loaded} = this.state;
-    if(loaded){
-      return(
-          <TabNavigation/>
-      ); 
-    }
-    else {
-      return <AppLoading startAsync={this.loadAssets} onFinish={this.handleLoaded} onError={this.handleError} />
+  render() {
+    const { loaded } = this.state;
+    if (loaded) {
+      return <MainNavigation />;
+    } else {
+      return (
+        <AppLoading
+          startAsync={this.loadAssets}
+          onFinish={this.handleLoaded}
+          onError={this.handleError}
+        />
+      );
     }
   }
 }
